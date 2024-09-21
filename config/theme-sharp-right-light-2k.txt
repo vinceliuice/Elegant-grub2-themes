@@ -38,7 +38,7 @@ terminal-border: "0"
 
 + image {
   top = 29%
-  right = 11%
+  left = 66%
   file = "logo.png"
 }
 
