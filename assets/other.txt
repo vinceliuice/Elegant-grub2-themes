@@ -28,6 +28,12 @@ float-left
 float-right
 sharp-left
 sharp-right
+window-left-alt
+window-right-alt
+float-left-alt
+float-right-alt
+sharp-left-alt
+sharp-right-alt
 Archlinux
 Empty
 Default
