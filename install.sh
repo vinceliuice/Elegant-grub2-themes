@@ -373,14 +373,14 @@ updating_grub() {
     grub2-mkconfig -o /boot/grub2/grub.cfg
   # Check for Fedora (regular or Atomic)
   elif has_command dnf || has_command rpm-ostree; then
-    # Check for UEFI
-    if [[ -f /boot/efi/EFI/fedora/grub.cfg ]]; then
-      prompt -s "Find config file on /boot/efi/EFI/fedora/grub.cfg ...\n"
-      grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
     # Check for BIOS
-    elif [[ -f /boot/grub2/grub.cfg ]]; then
+    if [[ -f /boot/grub2/grub.cfg ]]; then
       prompt -s "Find config file on /boot/grub2/grub.cfg ...\n"
       grub2-mkconfig -o /boot/grub2/grub.cfg
+    # Check for UEFI
+    elif [[ -f /boot/efi/EFI/fedora/grub.cfg ]]; then
+      prompt -s "Find config file on /boot/efi/EFI/fedora/grub.cfg ...\n"
+      grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
     fi
   fi
 
@@ -415,7 +415,7 @@ remove() {
   local side="${3}"
   local color="${4}"
 
-  local THEME_DIR="${GRUB_DIR}/${THEME_NAME}-${theme}"
+  local THEME_DIR="${GRUB_DIR}/${THEME_NAME}-${theme}-${type}-${side}-${color}"
 
   # Check for root access and proceed if it is present
   if [[ "$UID" -eq "$ROOT_UID" ]]; then
