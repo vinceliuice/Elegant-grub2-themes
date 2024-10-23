@@ -58,6 +58,7 @@ if [[ "$EXPORT_TYPE" == "icons-light" || "$EXPORT_TYPE" == "icons-dark" ]]; then
   cp -a manjaro.png Manjaro.x86_64.png
   cp -a manjaro.png manjarolinux.png
   cp -a pop-os.png pop.png
+  cp -a opensuse.png openSUSE.png
   cp -a driver.png memtest.png
 fi
 exit 0
