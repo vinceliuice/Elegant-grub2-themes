@@ -6,7 +6,7 @@ THEME_NAME=Elegant
 
 SCREEN_VARIANTS=('1080p' '2k' '4k')
 THEME_VARIANTS=('forest' 'mojave' 'mountain' 'wave')
-TYPE_VARIANTS=('window' 'float' 'sharp')
+TYPE_VARIANTS=('window' 'float' 'sharp' 'blur')
 SIDE_VARIANTS=('left' 'right')
 COLOR_VARIANTS=('dark' 'light')
 

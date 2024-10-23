@@ -5,7 +5,7 @@ Usage:  `sudo ./install.sh [OPTIONS...]`
 
 ```
   -t, --theme     Background theme variant(s) [forest|mojave|mountain|wave] (default is forest)
-  -p, --type      Theme style variant(s)      [window|float|sharp] (default is window)
+  -p, --type      Theme style variant(s)      [window|float|sharp|blur] (default is window)
   -i, --side      Picture display side        [left|right] (default is left)
   -c, --color     Background color variant(s) [dark|light] (default is dark)
   -s, --screen    Screen display variant(s)   [1080p|2k|4k] (default is 1080p)
@@ -64,10 +64,10 @@ sudo ./install.sh -r -t mountain
  - If any issues occur, report then to the [issue](issues) page
 
 ## Preview:
-![preview-01](preview-01.jpeg?raw=true)
-![preview-02](preview-02.jpeg?raw=true)
-![preview-03](preview-03.jpeg?raw=true)
-![preview-04](preview-04.jpeg?raw=true)
+![preview-01](preview-01.jpg?raw=true)
+![preview-02](preview-02.jpg?raw=true)
+![preview-03](preview-03.jpg?raw=true)
+![preview-04](preview-04.jpg?raw=true)
 
 ## Documents
 

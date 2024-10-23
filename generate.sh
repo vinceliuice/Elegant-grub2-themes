@@ -11,7 +11,7 @@ REO_DIR="$(cd $(dirname $0) && pwd)"
 
 SCREEN_VARIANTS=('1080p' '2k' '4k')
 THEME_VARIANTS=('forest' 'mojave' 'mountain' 'wave')
-TYPE_VARIANTS=('window' 'float' 'sharp')
+TYPE_VARIANTS=('window' 'float' 'sharp' 'blur')
 SIDE_VARIANTS=('left' 'right')
 COLOR_VARIANTS=('dark' 'light')
 
@@ -71,7 +71,7 @@ Usage: $0 [OPTION]...
 
 OPTIONS:
   -t, --theme     Background theme variant(s) [forest|mojave|mountain|wave] (default is forest)
-  -p, --type      Theme style variant(s)      [window|float|sharp] (default is window)
+  -p, --type      Theme style variant(s)      [window|float|sharp|blur] (default is window)
   -i, --side      Picture display side        [left|right] (default is left)
   -c, --color     Background color variant(s) [dark|light] (default is dark)
   -s, --screen    Screen display variant(s)   [1080p|2k|4k] (default is 1080p)
@@ -103,20 +103,42 @@ generate() {
 
   # Don't preserve ownership because the owner will be root, and that causes the script to crash if it is ran from terminal by sudo
   cp -a --no-preserve=ownership "${REO_DIR}/common/"*.pf2 "${THEME_DIR}"
-  cp -a --no-preserve=ownership "${REO_DIR}/config/theme-${type}-${side}-${color}-${screen}.txt" "${THEME_DIR}/theme.txt"
   cp -a --no-preserve=ownership "${REO_DIR}/backgrounds/backgrounds-${theme}/background-${theme}-${type}-${side}-${color}.jpg" "${THEME_DIR}/background.jpg"
   cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-icons-${color}/icons-${color}-${screen}" "${THEME_DIR}/icons"
-  cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_e-${theme}-${color}.png" "${THEME_DIR}/select_e.png"
-  cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_c-${theme}-${color}.png" "${THEME_DIR}/select_c.png"
-  cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_w-${theme}-${color}.png" "${THEME_DIR}/select_w.png"
-  cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/${type}-${side}.png" "${THEME_DIR}/info.png"
+
+  if [[ "${type}" == "blur" ]]; then
+    cp -a --no-preserve=ownership "${REO_DIR}/config/theme-sharp-${side}-dark-${screen}.txt" "${THEME_DIR}/theme.txt"
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_e-white.png" "${THEME_DIR}/select_e.png"
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_c-white.png" "${THEME_DIR}/select_c.png"
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_w-white.png" "${THEME_DIR}/select_w.png"
+  else
+    cp -a --no-preserve=ownership "${REO_DIR}/config/theme-${type}-${side}-${color}-${screen}.txt" "${THEME_DIR}/theme.txt"
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_e-${theme}-${color}.png" "${THEME_DIR}/select_e.png"
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_c-${theme}-${color}.png" "${THEME_DIR}/select_c.png"
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/select_w-${theme}-${color}.png" "${THEME_DIR}/select_w.png"
+  fi
 
   if [[ "${theme}" == "forest" ]]; then
-    cp -rf --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/${type}-${side}-alt.png" "${THEME_DIR}/info.png"
+    if [[ "${type}" == "blur" ]]; then
+      cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/sharp-${side}-alt.png" "${THEME_DIR}/info.png"
+    else
+      cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/${type}-${side}-alt.png" "${THEME_DIR}/info.png"
+    fi
+  else
+    if [[ "${type}" == "blur" ]]; then
+      cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/sharp-${side}.png" "${THEME_DIR}/info.png"
+    else
+      cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/${type}-${side}.png" "${THEME_DIR}/info.png"
+    fi
   fi
 
   prompt -i "\n Install ${logoicon} logo."
-  cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/${logoicon}.png" "${THEME_DIR}/logo.png"
+  if [[ -f "${REO_DIR}/assets/assets-other/other-${screen}/${logoicon}.png" ]]; then
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/${logoicon}.png" "${THEME_DIR}/logo.png"
+  else
+    prompt -w "\n Did not find ${logoicon} logo ! install default one."
+    cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/Default.png" "${THEME_DIR}/logo.png"
+  fi
 
   # Use custom background.jpg as grub background image
   if [[ -f "${REO_DIR}/background.jpg" ]]; then
@@ -183,6 +205,10 @@ while [[ $# -gt 0 ]]; do
             ;;
           sharp)
             types+=("${TYPE_VARIANTS[2]}")
+            shift
+            ;;
+          blur)
+            types+=("${TYPE_VARIANTS[3]}")
             shift
             ;;
           -*)

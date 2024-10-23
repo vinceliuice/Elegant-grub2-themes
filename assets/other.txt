@@ -22,6 +22,9 @@ select_e-forest-light
 select_w-forest-dark
 select_c-forest-dark
 select_e-forest-dark
+select_w-white
+select_c-white
+select_e-white
 window-left
 window-right
 float-left
@@ -70,7 +73,7 @@ Regolith
 Artix
 Fedora
 Zorin
-Manjaro
+ManjaroLinux
 Nixos
 UbuntuDDE
 Archcraft

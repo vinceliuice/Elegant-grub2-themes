@@ -6,7 +6,7 @@ OPTIPNG="/usr/bin/optipng"
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 THEME_VARIANTS=('-forest' '-mojave' '-mountain' '-wave')
-TYPE_VARIANTS=('-window' '-float' '-sharp')
+TYPE_VARIANTS=('-window' '-float' '-sharp' '-blur')
 SIDE_VARIANTS=('-left' '-right')
 COLOR_VARIANTS=('-light' '-dark')
 
