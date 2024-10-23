@@ -48,7 +48,7 @@ Kubuntu
 Linuxmint
 Lubuntu
 Mageia
-Opensuse
+openSUSE
 Siduction
 Solus
 Ubuntu
