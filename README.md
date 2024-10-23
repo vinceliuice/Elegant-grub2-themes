@@ -1,7 +1,7 @@
 
 ## Installation:
 
-Usage:  `sudo ./install.sh [OPTIONS...]`
+Usage:  `./install.sh [OPTIONS...]`
 
 ```
   -t, --theme     Background theme variant(s) [forest|mojave|mountain|wave] (default is forest)
