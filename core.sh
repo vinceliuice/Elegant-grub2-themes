@@ -65,13 +65,13 @@ has_command() {
 
 copy_files() {
   # Make a themes directory if it doesn't exist
-  prompt -i "\n Checking themes directory ${THEME_DIR} ..."
+  prompt -w "Checking themes directory ...\n"
 
   [[ -d "${THEME_DIR}" ]] && rm -rf "${THEME_DIR}"
   mkdir -p "${THEME_DIR}"
 
   # Copy theme
-  prompt -i "\n Install in ${THEME_DIR} ..."
+  prompt -i "Install in ${THEME_DIR} ...\n"
 
   # Don't preserve ownership because the owner will be root, and that causes the script to crash if it is ran from terminal by sudo
   cp -a --no-preserve=ownership "${REO_DIR}/common/"*.pf2 "${THEME_DIR}"
@@ -104,7 +104,7 @@ copy_files() {
     fi
   fi
 
-  prompt -i "\n Install ${logoicon} logo."
+  prompt -i "Install ${logoicon} logo.\n"
   if [[ -f "${REO_DIR}/assets/assets-other/other-${screen}/${logoicon}.png" ]]; then
     cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-other/other-${screen}/${logoicon}.png" "${THEME_DIR}/logo.png"
   else
@@ -114,7 +114,7 @@ copy_files() {
 
   # Use custom background.jpg as grub background image
   if [[ -f "${REO_DIR}/background.jpg" ]]; then
-    prompt -w "\n Using custom background.jpg as grub background image..."
+    prompt -w "Using custom background.jpg as grub background image...\n"
     cp -a --no-preserve=ownership "${REO_DIR}/background.jpg" "${THEME_DIR}/background.jpg"
     convert -auto-orient "${THEME_DIR}/background.jpg" "${THEME_DIR}/background.jpg"
   fi
@@ -134,11 +134,11 @@ install() {
     copy_files
 
     # Set theme
-    prompt -i "\n Setting ${THEME_NAME}-${theme}-${type}-${side}-${color} as default..."
+    prompt -i "Setting ${THEME_NAME}-${theme}-${type}-${side}-${color} as default...\n"
 
     # Backup grub config
     if [[ -f /etc/default/grub.bak ]]; then
-      prompt -w "\n File '/etc/default/grub.bak' already exists!"
+      prompt -w "File '/etc/default/grub.bak' already exists!\n"
     else
       cp -an /etc/default/grub /etc/default/grub.bak
     fi
@@ -181,6 +181,8 @@ install() {
       echo "GRUB_BACKGROUND=\"${THEME_DIR}/background.jpg\"" >> /etc/default/grub
     fi
 
+    prompt -i "Setting ${screen} resolution as 'GRUB_GFXMODE'...\n"
+
     # Make sure the right resolution for grub is set
     if [[ ${screen} == '1080p' ]]; then
       gfxmode="GRUB_GFXMODE=1920x1080,auto"
@@ -216,7 +218,7 @@ install() {
     fi
 
     # Update grub config
-    prompt -i "\n Updating grub config... \n"
+    prompt -i "Updating grub config...\n"
     updating_grub
     prompt -w "\n * At the next restart of your computer you will see your new Grub theme\n"
 
