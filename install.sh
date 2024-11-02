@@ -223,11 +223,11 @@ done
 # Show terminal user interface for better use
 if [[ "${dialog:-}" == 'false' ]]; then
   if [[ "${remove:-}" != 'true' ]]; then
-    for theme in "${themes[0]}"; do
-      for type in "${types[0]}"; do
-        for side in "${sides[0]}"; do
-          for color in "${colors[0]}"; do
-            for screen in "${screens[0]}"; do
+    for theme in "${themes[@]-${THEME_VARIANTS[0]}}"; do
+      for type in "${types[@]-${TYPE_VARIANTS[0]}}"; do
+        for side in "${sides[@]-${SIDE_VARIANTS[0]}}"; do
+          for color in "${colors[@]-${COLOR_VARIANTS[0]}}"; do
+            for screen in "${screens[@]-${SCREEN_VARIANTS[0]}}"; do
               install "${theme}" "${type}" "${side}" "${color}" "${screen}"
             done
           done
@@ -235,10 +235,10 @@ if [[ "${dialog:-}" == 'false' ]]; then
       done
     done
   elif [[ "${remove:-}" == 'true' ]]; then
-    for theme in "${themes[0]}"; do
-      for type in "${types[0]}"; do
-        for side in "${sides[0]}"; do
-          for color in "${colors[0]}"; do
+    for theme in "${themes[@]-${THEME_VARIANTS[0]}}"; do
+      for type in "${types[@]-${TYPE_VARIANTS[0]}}"; do
+        for side in "${sides[@]-${SIDE_VARIANTS[0]}}"; do
+          for color in "${colors[@]-${COLOR_VARIANTS[0]}}"; do
             remove "${theme}" "${type}" "${side}" "${color}"
           done
         done
