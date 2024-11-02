@@ -219,14 +219,16 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-for theme in "${themes[@]}"; do
-  for type in "${types[@]}"; do
-    for side in "${sides[@]}"; do
-      for color in "${colors[@]}"; do
-        for screen in "${screens[@]}"; do
+for theme in "${themes[0]}"; do
+  for type in "${types[0]}"; do
+    for side in "${sides[0]}"; do
+      for color in "${colors[0]}"; do
+        for screen in "${screens[0]}"; do
           generate "${dest:-$REO_DIR}" "${theme}" "${type}" "${side}" "${color}" "${screen}"
         done
       done
     done
   done
 done
+
+exit 0
