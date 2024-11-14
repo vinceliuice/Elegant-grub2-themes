@@ -127,7 +127,7 @@ install() {
   local color="${4}"
   local screen="${5}"
 
-  local THEME_DIR="${GRUB_DIR}/${THEME_NAME}-${theme}-${type}-${side}-${color}"
+  THEME_DIR="${GRUB_DIR}/${THEME_NAME}-${theme}-${type}-${side}-${color}"
 
   # Check for root access and proceed if it is present
   if [[ "$UID" -eq "$ROOT_UID" ]]; then
