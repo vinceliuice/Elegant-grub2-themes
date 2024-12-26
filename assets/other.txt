@@ -37,7 +37,7 @@ float-left-alt
 float-right-alt
 sharp-left-alt
 sharp-right-alt
-Archlinux
+Arch
 Empty
 Default
 Antergos
