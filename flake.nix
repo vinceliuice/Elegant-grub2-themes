@@ -17,6 +17,15 @@
       }:
       let
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
+
+        # Helper function to select logo file based on boolean
+        selectLogoFile = if config.logo then "Nixos.png" else "Empty.png";
+
+        # Helper function to select info file based on boolean
+        selectInfoFile =
+          if config.info
+          then "${config.variant}-${config.side}.png"
+          else "Empty.png";
       in
       pkgs.stdenv.mkDerivation {
         pname = "elegant-grub-theme";
@@ -45,17 +54,8 @@
           cp -r assets/assets-other/other-${config.resolution}/select_e-${config.background}-${config.color}.png $out/theme/select_e.png
           cp -r assets/assets-other/other-${config.resolution}/select_w-${config.background}-${config.color}.png $out/theme/select_w.png
 
-          if ${config.logo}; then
-            cp assets/assets-other/other-${config.resolution}/Nixos.png $out/theme/logo.png
-          else
-            cp assets/assets-other/other-${config.resolution}/Empty.png $out/theme/logo.png
-          fi
-
-          if ${config.info}; then
-            cp assets/assets-other/other-${config.resolution}/${config.variant}-${config.side}.png $out/theme/info.png
-          else
-            cp assets/assets-other/other-${config.resolution}/Empty.png $out/theme/info.png
-          fi
+          cp assets/assets-other/other-${config.resolution}/${selectLogoFile} $out/theme/logo.png
+          cp assets/assets-other/other-${config.resolution}/${selectInfoFile} $out/theme/info.png
         '';
       };
   };
