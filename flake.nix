@@ -45,13 +45,13 @@
           cp -r assets/assets-other/other-${config.resolution}/select_e-${config.background}-${config.color}.png $out/theme/select_e.png
           cp -r assets/assets-other/other-${config.resolution}/select_w-${config.background}-${config.color}.png $out/theme/select_w.png
 
-          if [ "${config.logo}" = "true" ]; then
+          if ${config.logo}; then
             cp assets/assets-other/other-${config.resolution}/Nixos.png $out/theme/logo.png
           else
             cp assets/assets-other/other-${config.resolution}/Empty.png $out/theme/logo.png
           fi
 
-          if [ "${config.info}" = "true" ]; then
+          if ${config.info}; then
             cp assets/assets-other/other-${config.resolution}/${config.variant}-${config.side}.png $out/theme/info.png
           else
             cp assets/assets-other/other-${config.resolution}/Empty.png $out/theme/info.png
