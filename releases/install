@@ -99,7 +99,7 @@ else
   prompt -e "[ Error! ] -> Run me as root "
 
   # persisted execution of the script as root
-  read -p "[ trusted ] specify the root password : " -t${MAX_DELAY} -s
+  read -p "[ trusted ] specify the root password : " -t ${MAX_DELAY} -s
   [[ -n "$REPLY" ]] && {
     sudo -S <<< $REPLY $0
   } || {
