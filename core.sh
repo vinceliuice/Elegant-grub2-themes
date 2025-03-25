@@ -64,6 +64,18 @@ has_command() {
 }
 
 copy_files() {
+  case "$screen" in
+    1080p)
+      fontsize='16'
+      ;;
+    2k)
+      fontsize='24'
+      ;;
+    4k)
+      fontsize='32'
+      ;;
+  esac
+
   # Make a themes directory if it doesn't exist
   prompt -w "Checking themes directory ...\n"
 
@@ -74,7 +86,8 @@ copy_files() {
   prompt -i "Install in ${THEME_DIR} ...\n"
 
   # Don't preserve ownership because the owner will be root, and that causes the script to crash if it is ran from terminal by sudo
-  cp -a --no-preserve=ownership "${REO_DIR}/common/"*.pf2 "${THEME_DIR}"
+  cp -a --no-preserve=ownership "${REO_DIR}/common/terminus"*".pf2" "${THEME_DIR}"
+  cp -a --no-preserve=ownership "${REO_DIR}/common/unifont-${fontsize}.pf2" "${THEME_DIR}"
   cp -a --no-preserve=ownership "${REO_DIR}/backgrounds/backgrounds-${theme}/background-${theme}-${type}-${side}-${color}.jpg" "${THEME_DIR}/background.jpg"
   cp -a --no-preserve=ownership "${REO_DIR}/assets/assets-icons-${color}/icons-${color}-${screen}" "${THEME_DIR}/icons"
 
