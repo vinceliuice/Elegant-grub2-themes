@@ -48,6 +48,7 @@ ubuntuDDE
 archcraft
 chimera
 brunch
+nobara
 
 recovery
 restart
